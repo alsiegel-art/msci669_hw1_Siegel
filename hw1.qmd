@@ -1,7 +1,7 @@
 ---
 title: "ARA 669 - Assignment 1"
-author: "Your name here"
-date: "today's date here"
+author: "Ari Siegel"
+date: "09/03/2026"
 output: html_document
 ---
 
@@ -18,7 +18,7 @@ Use the code chunk below to load the tidyverse package \[0.5 pt\].
 ```{r setup}
 #| message: false
 #| error: false
-
+library(tidyverse)
 # Paste your code in here!
 
 ```
@@ -31,7 +31,13 @@ Several well-behaved datasets are preloaded into R and are frequently used to de
 #| message: false
 #| error: false
 
-# Paste your code in here!
+data()
+ToothGrowth #I chose this one because it looked simple
+
+
+ToothGrowth$dose #Checking which doses are avialable after making an initial graph
+#in the next box - making sure there are just 3 possible doses.
+
 
 ```
 
@@ -45,15 +51,37 @@ Explore the data visually using ggplot2 \[1 pt\].
 #| message: false
 #| error: false
 
-# Paste your code in here!
+ggplot(ToothGrowth, aes(y = len, x = dose)) +
+  geom_point() +
+  facet_wrap(~supp)
+
+ggplot(ToothGrowth, aes(y = len, x = dose)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_wrap(~supp)
+
+ggplot(ToothGrowth, aes(y = len, x = dose, group = dose)) +
+  geom_boxplot() +
+  facet_wrap(~supp) +
+  labs(title = "Effect of Vitamin C on Tooth Growth in Guinea Pigs") +
+  labs(x = "Dose", y = "Length")
+
+
+
 
 ```
 
 Describe your approach. What choices did you make in deciding which variables to use, plot types, etc., and why? [1 pt].
 
+I had a dataset with three variables - one treatment (independent, dose), one response (dependent, len for tooth length), and one grouping variable (supp, which I'm assuming with no metadata to be another treatment variable, what was used to supply the dose, either OJ or VC). My first question is if the tooth length is impacted by the dose, so I just one against the other  with a scatterplot. I thought I saw a clear trend, but wanted to plot a trendline to see if the standard error was too high - it looks small enough I see a trend.
+Then, realizing that the dose was only given in 3 discrete amounts, I realized that a boxplot was probably a better way to compare between doses (I have discrete, not continuous, data for the independent variable). I want to compare between doses, this data is not well suited to a linear regression because I only have a few distinct x values. I always kept the supp as a facet - because the other question I had was if the supp impacted the relationship between dose and len - in other words, did the source of the dose (if supp is supply as I'm guessing) matter? The two sides look fairly similar, but in the boxplots I think I see that at lower doses OJ is more effective at increasing tooth length.
+
 ## Read & reflect
 
 Read the perspectives article “Should we still teach or learn coding? A postgraduate student perspective on the use of large language models for coding in ecology & evolution” (Campbell et al. 2024). What part(s) of this article resonated with you, and why [1.5 pts]? 
+
+I strongly identified with the idea that having extensive prior knowledge is helpful and sometimes necessary to benefit from LLMs. Even if LLMs gave useful answers to every question the first time, and didn't lead people down the wrong path, which they absolutely do, it would still be challenging to get good answers without knowing what to ask. I have struggled through overly complicated solutions to problems simply because I was using slightly different terminology to describe something I wanted to do than is standard, and had to completely reinvent the wheel. Without knowing what the options are, what packages exist, what types of statistics are even available, it's hard to ask an LLM for help doing one.
+
 
 ## AI statement
 
@@ -61,7 +89,13 @@ Describe your use of AI in this assignment, including:
 
 1.  What tool or service did you use?
 
+Chatgpt.
+
 2.  What was the specific purpose or use?
 
+I asked chatgpt one question - on my boxplot. It had been a while since I made a boxplot, and I couldn't remember exactly how to use group within aes. I initially grouped by 'dose', but did not also map 'dose' onto the x axis, so I couldn't clearly see which dose was which box in the boxplot.
+
 3.  How did this use enhance your understanding of the topic/code?
+
+It didn't enhance my understanding as much as it made my graph more comprehensible for you to read - if I cared about the data analysis, it would simply make my understanding of what the graph was telling me easier.
 
