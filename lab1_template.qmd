@@ -1,0 +1,385 @@
+---
+title: "MSCI 669 - Lab 1"
+subtitle: "Simple Linear Regression"
+author: "Gina Ralph"
+date: 2026-09-04
+format: html
+editor: source
+---
+
+## Setup
+
+```{r setup}
+#| warning: false
+#| message: false
+
+library(car)
+library(tidyverse)
+
+```
+
+## The 'iris' dataset
+
+We're going to start with a very simple, well-behaved dataset that is preloaded in R, 'iris'. This dataset was introduced by R. Fisher in 1936, and includes sepal and petal measurements of three species, *Iris setosa*, *I. versicolor*, and *I. virginica*. All measurements are in cm.
+
+What questions should we ask ourselves about these data?
+
+
+```{r iris}
+
+# internal structure
+
+
+
+# display first few lines, can change how many print
+
+
+
+# number of rows
+
+
+
+# number of measurements per species
+
+
+```
+
+## Graphing
+
+We're primarily going to use ggplot2 for plotting in this class, but base R functions will be included periodically. Base R is great for quick, simple plots, but complicated figures are much more difficult; in contrast, a simple plot in ggplot still requires several lines of code, but complex graphics are much easier. I've included some example code at the end of the script (see Base R vs. ggplot2) to show these differences.
+
+```{r plot1}
+
+# Sepal and petal lengths
+
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point(size = 3) +
+  theme_classic()
+
+```
+
+## Linear regression
+
+Let's start with a linear model that describes the relationship between sepal length and petal length.
+
+H0: 
+
+H1: 
+
+```{r lm1}
+
+
+
+```
+
+The summary of lm() includes:
+
+- Call: 
+- Residuals: 
+- Coefficients: 
+- additional information about the model:
+
+## Model diagnostics
+
+Now that we have a model that seems good (e.g., std. error of coefficients aren't too high relative to the scale of the estimate, decent r^2^), we need to check if the data meet the assumptions of a linear model.
+
+What are the assumptions?
+
+
+
+These assumptions can be checked visually, through diagnostic tests, and by examining the experimental or sampling design. We're going to focus on visual examination for evaluation of the assumptions.
+
+## Residuals
+
+We'll start with the residuals, which are differences between the observed values and the model predictions; as such, they can be thought of as estimates of a model's error (differences between the model predictions and the true, unknown value). There are several types of residuals, but we'll start with the basic, unstandardized residual, which is simply the difference between the predicted and observed values.
+
+There are several ways to extract these raw residuals from the model:
+
+```{r resids}
+
+# from the summary 
+
+
+
+# a dedicated function
+
+
+
+# manually
+
+
+
+```
+
+Let's visualize the residuals we just calculated:
+
+```{r residplot}
+
+ggplot(
+  iris2,
+  aes(x = Sepal.Length, y = Petal.Length)) + 
+  geom_point() + 
+
+  theme_classic()
+
+```
+
+## Model assumptions
+
+**Linearity**
+
+A plot of residuals vs. fitted values can help visualize whether there might be non-linear patterns in the data:
+
+```{r fitted}
+
+
+
+```
+
+Do you see any patterns in the data (i.e., areas where the residuals are consistently positive or negative)? Ideally, you'd see equally spread residuals around the horizontal line (at 0).
+
+**Normality**
+
+You can start with a quick histogram, which will give you an idea of the general shape of your residuals.
+
+```{r normality1}
+
+ggplot(
+  iris2,
+  aes(x = r1)) + 
+  geom_histogram(
+    binwidth = 0.1) + 
+  theme_classic()
+
+```
+
+More commonly, a q-q plot (quantile-quantile plot) is used to evaluate whether the residuals are normally distributed by comparing the quantiles of the residuals against the quantiles of a theoretical normal distribution. An easy way to do this is using the built-in functions in base R:
+
+```{r baseqq}
+
+
+
+```
+
+What are these functions actually doing?
+
+```{r qqmanual}
+
+## calculate and plot theoretical quantiles
+
+# sort the residuals, pull out the rank order
+
+
+
+# expected cumulative probability of ordered residuals
+
+
+
+# Z-score (based on standard normal) of these values
+
+ 
+
+# plot theoretical quantiles and sample quantiles
+
+
+
+##  add normal line (R default: 1st and 3rd quantiles)
+
+# calculate quantiles 
+
+
+
+# get intercept and slope of the line
+
+
+
+# add to plot
+
+
+
+```
+
+Do you see any patterns in the data? Ideally, the data will fall neatly along the line.
+
+**Constant variance**
+
+We can look at the scale-location (or spread-location) plot to evaluate whether or not the variance is constant across the predicted values.
+
+```{r scale}
+
+
+
+```
+
+Do you see any patterns in the data (e.g., changes in the spread as a function of the fitted values)? Ideally, you'd see equally spread residuals throughout the entire range of fitted values.
+
+**Independence**
+
+Independence, in this context, means that residuals from a model are not correlated. We will often look at the experimental or sampling design first. For example, samples from the same individual, or close in space or time, might be correlated.
+
+**Influential data points**
+
+While not technically one of the assumptions of linear regression, we often want to check to see if our data set includes any particularly influential points. One way to examine this is using Cook's distance ($D_i$), which measures how much a regression model changes when a given point is removed from the dataset:
+
+$$D_i = \frac{\sum_{j=1}^{n} (\hat{y_j} - \hat{y_{j(i)}})^2}{ps^2}$$
+
+where $\hat{y_j}$ is the fitted response variable of the full model, $\hat{y_{j(i)}}$ is the fitted response value obtained when excluding observation $i$, $p$ is the number of independent variables in the model, and $s^2$ is the mean square error of the model. Generally, you want to look for high values, greater than 0.5-1, as being indicative of points that have high influence on the model results.
+
+Fortunately, there's a built-in function to do the math for us:
+
+```{r cooks}
+
+
+
+```
+
+A related term is leverage, a measure of how far away the independent variable values of an observation are from those of the other observations and can be viewed as the 'weighted' distance between $x_i$ to the mean of all $x_i$'s. An observation with high leverage has the potential to influence the model fit, such that the removal of the observation could cause large changes in the model parameters. We're not going to go deep into the math behind this (which involves diagonal elements of project matricies), but note:
+
+1.  The sum of the leverages is equal to the number of parameters ($p$) in the model, including the intercept (but not including the error)
+2.  $h_{ii} > 2 \frac{p}{n}$ are often considered outliers (sometimes $3 \frac{p}{n}$ is used as the threshold).
+
+We can extract these values easily via:
+
+```{r hat}
+
+
+
+iris2 |> 
+  rownames_to_column() |> 
+
+  arrange(leverage)
+
+```
+
+These data points have high leverage, which means they *may* be influential to the model and could be worth further exploration. 
+
+## Other types of residuals
+
+We focused on the raw residuals (the difference between the predicted and observed values), but there are several other types of residuals that we'll need to know throughout the course. Note that there are differences in terminology, so you may see these terms used (slightly) differently in other places.
+
+**Standardized residuals**
+
+Raw residuals divided by the estimated standard deviation (this is the default standardization in R):
+
+$$r_i = \frac{\hat{\epsilon_{i}}}{\hat{\sigma}\sqrt{1-h_{ii}}}$$
+
+where $r_i$ is the standardized residual, $\hat{\epsilon_i}$ is the raw residual, $\hat{\sigma}$ is the standard error of the residuals,
+
+$$\hat{\sigma} = \frac{1}{n-m} \sum_{j=1}^{n} \hat{\epsilon_{j}}^2$$
+
+and $h_{ii}$ is the leverage.
+
+We can extract these directly using:
+
+```{r standardized}
+
+
+
+```
+
+Some properties of these standardized residuals are not ideal, especially that the estimate of the standard error $\hat{\sigma}$ includes observation $i$.
+
+**Studentized residuals**
+
+Raw residuals divided by the estimate of the standard deviation of the residuals calculated from a regression leaving out observation $i$:
+
+
+$$t_i = \frac{\hat{\epsilon_{i}}}{\hat{\sigma_{-i}}\sqrt{1-h_{ii}}}$$
+
+where $t_i$ is the studentized residual, $\hat{\epsilon_i}$ is the raw residual, $\hat{\sigma_{-1}}$ is the standard error of the residuals without the $i^{th}$ observation, and $h_{ii}$ is the leverage.
+
+Again, we can extract these directly using:
+
+```{r studentized}
+
+
+
+```
+
+**Scaled residuals**
+
+Any residual divided by a quantity that is not an estimate of the variance of the residual is a scaled residual. Pearson and Pearson-type residuals are examples of scaled residuals, in which the raw residuals are divided by the standard deviation of the response variable:
+
+$$rp_i = \frac{\hat{\epsilon_{i}}}{\sqrt{\hat{Var[Y_i]}}}$$
+
+Pearson and Pearson-type residuals are more commonly used in generalized linear models, so we'll discuss these more later in the semester. 
+
+**DHARMa residuals**
+
+Simulation-based, scaled (quantile) residuals for fitted generalized linear mixed models. We'll talk about these more when we get to GLMMs.
+
+## plot()
+
+When you use the plot() function using the model as the only argument, several of these diagnostic plots are outputted.
+
+```{r diagnostics}
+
+
+
+```
+
+Looking at all the plots together, what do we think about this model? What should our next steps be?
+
+## qqPlot
+
+The function qqPlot from the 'car' package provides an alternative visualization of the q-q plot with confidence intervals (via parametric bootstrap) to help evaluate the scale of deviations from normality. 
+
+```{r qqPlot}
+
+
+
+```
+
+You can also change how the q-q line is generated. The default is robust-regression line (); change to line = "quartiles" to match the default quartile-pairs approach in base R's qqline. 
+
+## Base R vs. ggplot2
+
+A simple plot is much shorter in base R than ggplot.
+
+```{r simple}
+
+plot(Sepal.Width ~ Sepal.Length, data = iris, pch = 16)
+
+ggplot(
+  iris, 
+  aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point()
+
+```
+
+In contrast, ggplot2, built on the [Grammar of Graphics](https://vita.had.co.nz/papers/layered-grammar.html), . I highly recommend the [R Graph Gallery](https://r-graph-gallery.com/) for inspiration on how to make effectively data visualizatoins.
+
+```{r complex}
+
+plot(
+  iris$Sepal.Width[iris$Species == "setosa"] ~ 
+    iris$Sepal.Length[iris$Species == "setosa"], 
+  pch = 16, col = "navy", 
+  xlab = "Sepal Length",
+  ylab = "Sepal Width",
+  las = 1,
+  xlim = c(4, 8), ylim = c(2.5, 4))
+
+points(
+  iris$Sepal.Width[iris$Species == "versicolor"] ~ 
+    iris$Sepal.Length[iris$Species == "versicolor"], 
+  pch = 16, col = "violet")
+
+points(
+  iris$Sepal.Width[iris$Species == "virginica"] ~ 
+    iris$Sepal.Length[iris$Species == "virginica"], 
+  pch = 16, col = "forestgreen")
+
+legend("bottomleft", 
+  legend = c("setosa", "versicolor", "virginica"), 
+  col = c("navy", "violet", "forestgreen"), 
+  pch = 16)
+
+# In contrast...
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point(size = 3) +
+  scale_color_viridis_d(option = "viridis") + 
+  theme_classic()
+
+```
