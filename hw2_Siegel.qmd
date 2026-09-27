@@ -1,0 +1,356 @@
+---
+title: "ARA 669 - Assignment 2"
+author: "Ari Siegel"
+date: "9/20/2026"
+output: html_document
+---
+
+## Overview
+
+The goal of this assignment is to apply the tools and approaches we've learned during lab to explore data from a study of periwinkle snail (*Littoraria irrorata*) association with big cordgrass (*Spartina cynosuroides*) and smooth cordgrass (*Spartina alterniflora*) in a salt marsh in Taskinas Creek, a tributary of the York River. The dataset includes the following variables:
+
+obs: Observation number
+quad: Quadrat number
+plantType: SPAL = *Spartina alterniflora*; SPCY = *Spartina cynosuroides*
+liveStems: Number of live stems
+deadStems: Number of dead stems
+burrows: Fiddler crab burrows greater than one centimeter
+mussels: Ribbed mussels (*Guekensia demissa*)
+snails: Periwinkle snails (*Littoraria irrorata*)
+snailDensity: Snail Density
+notes: any notes about the observation
+
+Please submit this assignment via GitHub by 24 September.  
+
+## Getting started
+
+**Use the code chunk below to load packages and the data. \[0.5 pt\]**
+
+```{r setup}
+#| message: false
+#| error: false
+
+library(tidyverse)
+library(ggplot2)
+Plant_Invert_Data <- read.csv("Failon_Plant_Stem_Densities_and_Invertebrate_Survey.csv")
+view(Plant_Invert_Data)
+
+```
+
+## Data exploration
+
+**Explore the data visually using ggplot2. \[0.5 pt\]**
+
+```{r plotting}
+#| message: false
+#| error: false
+
+ggplot(Plant_Invert_Data, mapping = aes(x = plantType, y = liveStems)) +
+  geom_boxplot()
+#Higher stem count for alterniflora.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = plantType, y = deadStems)) +
+  geom_boxplot()
+#But higher dead stem count for SPCY
+
+ggplot(Plant_Invert_Data, mapping = aes(x = deadStems)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#Across the board - it's not just a few plots with really high dead stem counts for SPCY,
+#the whole distribution is higher.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#Same for the difference in live stems.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = burrows)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#Higher burrow counts for SPCY potentially, but not by a ton.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = mussels)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#very few mussels anywhere.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = snails)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#plenty of snails, similar distribution and numbers.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = snailDensity)) +
+  geom_histogram() +
+  facet_wrap(~plantType)
+#same plot just standardized per m^2 probably?
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = snails, color = plantType)) +
+  geom_point()
+#Do snails respond to the number of live stems?
+#It looks like not much, maybe a low stem counts, but that only occurs in SPCY.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = snails)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~plantType)
+#Slight positive relationship, but huge SE.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = deadStems, y = snails)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~plantType)
+#Same with dead stems but negative.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~plantType)
+#live and dead stems are nowhere near as correlated as I expected.
+
+#the clearest relationships are the differences between the species in stem counts.
+
+```
+
+**Describe your approach. What choices did you make in deciding which variables to use, plot types, etc., and why? \[1 pt\]**
+
+#First I checked how the two species differed from one another in stem counts, figuring that stem counts would be what I looked at as a predictor of most of the other data (invertebrate counts). Seeing how the two species differ would give me a quick indication of how different the growth patterns and densities of the two are.
+#They looked pretty distinct. Next, I wondered if dead stems showed the same relationship - they didn't, which is interesting.
+#Next I wondered if these differences between species continued into other variables, and wanted also to see the distribution of those variables. That way I can see where in the distribution any differences are coming from.
+#Once I got an idea of that, I wanted to see how some of these things related to one another - are there quick easy to identify patterns?
+#Things were less cleanly correlated with one another than I expected.
+
+#Boxplots to compare between species at first made sense, for a clear view of the side by side.
+#For distributions, I needed histograms.
+#And to see relationships between variables, I wanted points, where I could see each datapoint and check if there were clear trends.
+
+
+## Research question
+
+**Based on the data description above and your visualizations, formulate research questions and testable hypotheses that could be answered by applying linear models to the data provided. \[1 pt\]**
+
+
+#Do snail counts or densities respond to stem counts? Does that relationship differ between species?
+#I hypothesize that snail counts are influenced by stem counts, and that that relationship is stronger
+#when considering species (adding species as another predictor variable into the model, with an interactive effect)
+#Do live and dead stem counts correlate to one another? Do differences between species impact That relationship?
+#Do snails respond more to live or dead stem counts?
+
+
+## Analysis
+
+**Develop a set of models (3+) that reflect the hypotheses described above. \[1 pt\]**
+
+```{r models}
+#| message: false
+#| error: false
+
+#Do snail counts respond to stem counts, and does that relationship differ between species?
+m1 <- lm(data = Plant_Invert_Data, snails ~ liveStems * plantType)
+
+#Do live and dead stem counts correlate to one another?
+m2 <- lm(data = Plant_Invert_Data, deadStems ~ liveStems)
+
+#Do differences between species impact that relationship?
+m3 <- lm(data = Plant_Invert_Data, deadStems ~ liveStems * plantType)
+
+#Do snails respond more to live or dead stem counts?
+m4 <- lm(data = Plant_Invert_Data, snails ~ deadStems + liveStems)
+
+
+
+```
+
+**Evaluate your models using an approach covered as part of this class. \[1 pt\]**
+
+```{r modelselection}
+#| message: false
+#| error: false
+
+
+summary(m1)
+#Not statistically significant, very low adjusted R-squared. Not a good model.
+summary(m2)
+#Statistically significant, but not a very high R^2. There is correlation, but it seems like I've missed something important.
+summary(m3)
+#Only plant type is significant, and the adjusted R^2 still isn't very high, but isn't so terrible given this is ecological data. It seems that the plant type might be the biggest impact on deadStems.
+summary(m4)
+#Significant intercept but the means are far from significant and the adjusted R^2 is so bad it's negative.
+#Not a good model.
+
+AIC(m1, m2, m3, m4)
+BIC(m1, m2, m3, m4)
+#The most supported model of the four is m3, which has both the lowest AIC and BIC.
+#From here I would check if a different model with just plant type is significant
+m5 <- lm(data = Plant_Invert_Data, deadStems~ plantType)
+summary(m5)
+#Significant, and just as high of an R^2.
+AIC(m3, m5)
+BIC(m3, m5)
+#And both AIC and BIC support m5 more than m3.
+
+
+
+
+```
+
+**Check your model diagnostics (i.e., are the model assumptions met) using an approach covered as part of this class. \[1 pt\]**
+
+```{r diagnostics}
+#| message: false
+#| error: false
+
+#I'm focusing in on the best two models I came up with, because otherwise things got repetitive.
+
+
+#First, a quick check:
+par(mfrow = c(2,2))
+plot(m3)
+#Nothing looks too terrible other than the gap in values in the middle.
+par(mfrow = c(2,2))
+plot(m5)
+#qq is fine, everything else has something weird going on - because this is categorical data probably.
+
+#Another quick check:
+performance::check_model(m3)
+#We don't appear to violate normality, linearity, have outliers, or violate homogeneity of variance too badly.
+#BUt, colinearity is an issue.
+#A high VIF is not a good sign - plant type is colinear with some other variable.
+performance::check_model(m5)
+#We seem to violate linearity and homogeneity of variance here, but it's hard to say because this isn't a great test to be done using linear regression anyways, it's comparing values between two groups.
+#This showed us that this model, while technically performing better, doesn't seem all that great either.
+#Maybe I should have used a chi-square for this.
+
+
+
+#Testing more thoroughly:
+#Linearity:
+#I'll test this somewhat in the answer to the next question.
+
+#Normality:
+m3$residuals
+qqnorm(m3$residuals)
+qqline(m3$residuals, lwd = 2, col = "blue")
+#This doesn't look too bad to me.
+qqnorm(m5$residuals)
+qqline(m5$residuals, lwd = 2, col = "blue")
+#Nor does this one.
+
+#Constant variance:
+rs_m3 <- abs(m3$residuals)
+rs_m5 <- abs(m5$residuals)
+
+plot(sqrt(rs_m3) ~ predict(m3), xlab = "Fitted values", ylab = "sqrt of |residuals|")
+#Not terrible, no clear slope, but it might be a little strange there's such a big gap in the middle.
+plot(sqrt(rs_m5) ~ predict(m5), xlab = "Fitted values", ylab = "sqrt of |residuals|")
+#This is just so strange it again shows this is not a great thing to make a linear regression.
+
+
+#Independence: Up to the sampling.
+
+#Looks like we're mostly okay.
+
+
+
+```
+
+**Provide parameter estimates and SEs for the most supported model and plot the fitted model over observed data. \[2 pts\]**
+
+```{r setup}
+#| message: false
+#| error: false
+#| 
+#I'm calling m3 the most supported model despite higher AIC and BIC than m5.
+#estimates
+m3$coefficients
+#SEs:
+coef(summary(m3))[, "Std. Error"]
+
+#Plot:
+summary(m3)
+#Model line:
+model_line <- m3$coefficients[1] + m3$coefficients[2]*Plant_Invert_Data$liveStems
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems)) +
+  geom_point()
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems)) + 
+  geom_point() + 
+  geom_line(aes(y = model_line), linewidth = 1, col = "red") +
+  geom_segment(aes(yend = predict(m3)), linetype = 3) +
+  theme_classic()
+#But this graph only plots one x vs one y.
+
+ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems, col = plantType)) + 
+  geom_point() + 
+  geom_line(aes(y = model_line), linewidth = 1, col = "red") +
+  geom_segment(aes(yend = predict(m3)), linetype = 3) +
+  theme_classic()
+#Slightly better? I still can't really graph the interaction.
+
+```
+
+
+
+
+
+
+## Conclusions
+
+**Provide summary statements about the quality of your analysis, including any potential limitations or caveats. \[1 pt\]**
+
+
+#Overall this analysis isn't great.
+#The best model I have in terms of AIC and BIC, m5, shouldn't even use linear regression at all, it's
+#more of a chi-square situation.
+#m3 is better in that it is well-suited to be a linear regression.
+#It meets most assumptions well. But, the VIF is high, the model violated multi-colinearity.
+#Some of the variables aren't statistically significant at all.
+#I think in terms of ecological meaning it's not bad, but I would need to address multi-colinearity somehow.
+
+
+## AI statement
+
+*If you used AI for this assignment, please describe your use, including:*
+
+*1.  What tool or service did you use?*
+
+*2.  What was the specific purpose or use?*
+
+*3.  How did this use enhance your understanding of the topic/code?*
+
+## Final Project
+
+Each student will complete an independent project using a dataset from their own research whenever possible. Students who do not have an appropriate dataset will be provided with one. **If you do not have a dataset to use for this project, please reach out to Rob & Gina as soon as possible.**
+
+The project is intended to mirror the statistical component of a scientific research study and will require students to integrate concepts learned throughout the course. Project components include: 
+
+- formulation of a research question, objective, and/or testable hypotheses;
+- description of the study design and data with justification of design adequacy;
+- exploratory data analysis;
+- selection and justification of an appropriate modeling approach;
+- model fitting, comparison, selection, and validation;
+- interpretation of results in the context of the research question;
+- preparation of publication-quality figures and tables;
+- a written report in the style of a short scientific paper (approximately 4-6 pages); and
+- a 3-minute lightening talk summarizing the study, analytical approach, results, and conclusions.
+
+Projects will be evaluated on the quality of the scientific question, appropriateness of the statistical methodology, rigor of the analysis, interpretation of results, clarity of written and oral communication, and reproducibility of the analytical workflow.
+
+To support you on this analytical journey, this project has been divided into four steps, which will all contribute to your final project grade (worth 50% of your total grade). 
+
+1. Project proposal, including research question and description of dataset
+2. Exploratory data analysis and proposed analytical approach
+3. Preliminary model fits and diagnostics
+4. Final paper and presentation
+
+## Project proposal
+
+
+**Formulate 1-2 research questions, objectives, and/or testable hypotheses of interest. Provide sufficient detail for someone not familiar with your work to understand the goal(s) of your project. \[2 pts\]**
+
+
+
+**Describe the study design and data, including justification of design adequacy to address the research question, objectives, and/or testable hypotheses described above. Provide sufficient detail to evaluate your data in the context of your questions of interest. \[3 pts\]**
+
+
+#I did this all via email - happy to redo it nicely in this script if that's easier, just let me know.
+#Thanks!
