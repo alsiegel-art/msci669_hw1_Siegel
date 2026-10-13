@@ -21,6 +21,7 @@ snailDensity: Snail Density
 notes: any notes about the observation
 
 Please submit this assignment via GitHub by 24 September.  
+8/9 - As mentioned previously, for future assignments, please: render the final document.
 
 ## Getting started
 
@@ -31,7 +32,7 @@ Please submit this assignment via GitHub by 24 September.
 #| error: false
 
 library(tidyverse)
-library(ggplot2)
+library(ggplot2) # ggplot2 is in the tidyverse so you don't have to library() it separately
 Plant_Invert_Data <- read.csv("Failon_Plant_Stem_Densities_and_Invertebrate_Survey.csv")
 view(Plant_Invert_Data)
 
@@ -123,6 +124,7 @@ ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems)) +
 #For distributions, I needed histograms.
 #And to see relationships between variables, I wanted points, where I could see each datapoint and check if there were clear trends.
 
+Just FYI, in .qmd files (outside of code chunks), the # is for headers, you can just write normally. You do still need # for comments/notes inside the code chunks. 
 
 ## Research question
 
@@ -159,6 +161,7 @@ m4 <- lm(data = Plant_Invert_Data, snails ~ deadStems + liveStems)
 
 
 ```
+Typically, you should use a discrete distribution for count data, rather than the normal distribution. 
 
 **Evaluate your models using an approach covered as part of this class. \[1 pt\]**
 
@@ -192,6 +195,7 @@ BIC(m3, m5)
 
 
 ```
+Note that you can't compare modesl with different response variables using AIC/BIC. 
 
 **Check your model diagnostics (i.e., are the model assumptions met) using an approach covered as part of this class. \[1 pt\]**
 
@@ -219,7 +223,7 @@ performance::check_model(m5)
 #We seem to violate linearity and homogeneity of variance here, but it's hard to say because this isn't a great test to be done using linear regression anyways, it's comparing values between two groups.
 #This showed us that this model, while technically performing better, doesn't seem all that great either.
 #Maybe I should have used a chi-square for this.
-
+Note that there isn't a problem with using categorical predictor variables for a linear regression. 
 
 
 #Testing more thoroughly:
@@ -288,6 +292,7 @@ ggplot(Plant_Invert_Data, mapping = aes(x = liveStems, y = deadStems, col = plan
 
 ```
 
+Using predict or other packages that are designed to streamline model predictions would have been better than just taking the model coefficients and generating one line. We'll revisit plotting and predictions and we haven't covered marginal means, which is necessary when you have more than 2 variables. 
 
 
 
