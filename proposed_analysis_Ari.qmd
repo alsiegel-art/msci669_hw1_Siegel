@@ -1,0 +1,300 @@
+---
+title: "ARA 669 - Exploratory data analysis and proposed analytical approach"
+author: "Ari Siegel"
+date: "10/15/2026"
+output: html_document
+---
+
+## Final Project
+
+Each student will complete an independent project using a dataset from their own research whenever possible. Students who do not have an appropriate dataset will be provided with one.
+
+The project is intended to mirror the statistical component of a scientific research study and will require students to integrate concepts learned throughout the course. Project components include: 
+
+- formulation of a research question, objective, and/or testable hypotheses;
+- description of the study design and data with justification of design adequacy;
+- exploratory data analysis;
+- selection and justification of an appropriate modeling approach;
+- model fitting, comparison, selection, and validation;
+- interpretation of results in the context of the research question;
+- preparation of publication-quality figures and tables;
+- a written report in the style of a short scientific paper (approximately 4-6 pages); and
+- a 3-minute lightening talk summarizing the study, analytical approach, results, and conclusions.
+
+Projects will be evaluated on the quality of the scientific question, appropriateness of the statistical methodology, rigor of the analysis, interpretation of results, clarity of written and oral communication, and reproducibility of the analytical workflow.
+
+To support you on this analytical journey, this project has been divided into four steps, which will all contribute to your final project grade (worth 50% of your total grade). 
+
+1. Project proposal, including research question and description of dataset
+2. Exploratory data analysis and proposed analytical approach
+3. Preliminary model fits and diagnostics
+4. Final paper and presentation
+
+## Exploratory data analysis and proposed analytical approach
+
+The goal of this component of the project is begin exploring your dataset and developing a plan for the analysis. 
+
+Please submit this assignment via GitHub by **12 October at 11:59pm**, including the raw data, .qmd, and .html files. Be sure that the entire file runs without errors before submitting. You can create a new folder in your homework repository or create a new repository specific to the final project, whichever you prefer. This exploratory analysis, preliminary model fits (part 3), and code used for the final paper and presentation will all be submitted via GitHub. 
+
+## Data exploration
+
+**Use the code chunk below to load packages and the data.**
+
+```{r setup}
+#| message: false
+#| error: false
+
+library(tidyverse)
+Raw_Data_For_Linear_Reg <- read_csv("Raw_Data_For_Linear_Reg.csv")
+view(Raw_Data_For_Linear_Reg)
+Useful_Columns <- Raw_Data_For_Linear_Reg[,c(2,4,8,12,14,43,47,48,51,52,55,56,64)]
+#Isolating the key data for the analysis I plan to do - year in multiple formats
+#so I can test it as a continuous or a factor variable.
+#Biomass of key species, shear strength at two depths, elevation, and depth to antecedent #soils
+
+
+```
+
+**Based on your research questions, objectives, and/or testable hypotheses, develop data visualizations using ggplot2. Consider visualizations that show relationships, the distribution of the underlying data, etc. If you need inspiration, check out the [R Graph Gallery](https://r-graph-gallery.com/). For each visualization, describe your approach: what choices did you make in deciding which variables to use, plot types, etc., and why? \[2.5 pts\]**
+
+
+I order marsh age in the following plots from oldest marsh to newest (and then CT, control, at the end, which doesn't have a defined age - it's a control because it is not migrating). Established has been marsh as long as we have maps, so it's basically > 1910 for all sites.
+
+All plots are split by site - site here would preferably be a mixed effect not a random effect - I want to know how sites differ.
+But, I only have 4 sites, so I may just need to run a different model for each site when I get to graphing.
+And year as the dependent variable in the first set of graphs is key - my main goal is to see how marsh age impacts ecosystem services.
+
+
+```{r fig1}
+#| message: false
+#| error: false
+
+#First I want to see if elevation and age correlate strongly like I would expect.
+#I chose a boxplot because I have 4 replicates (plots) per age class at each site,
+#and I want to see both mean and variability within each age class clearly
+ggplot(Useful_Columns, mapping = aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = Average.Elevations)) +
+  geom_boxplot() +
+  facet_wrap(~Site) +
+  labs(x = "Year Created", y = "Elevation [m NAVD88]")
+
+
+```
+
+
+I want to check a few other variables in the same way and for the same reason - shear strength at both depths, and the depth of the organic layer.
+```{r fig2}
+#| message: false
+#| error: false
+#0-10cm shear strength:
+
+
+ggplot(Useful_Columns, mapping = aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = Shear_Shallow_kpa)) +
+  geom_boxplot() +
+  facet_wrap(~Site) +
+  labs(x = "Year Created", y = "Shear Strength 0-10cm [kpa]")
+
+
+```
+
+```{r fig3}
+#| message: false
+#| error: false
+#10-30cm shear strength:
+
+
+ggplot(Useful_Columns, mapping = aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = as.numeric(Shear_Deep_kpa))) +
+  geom_boxplot() +
+  facet_wrap(~Site) +
+  labs(x = "Year Created", y = "Shear Strength 10-30cm [kpa]")
+
+
+```
+
+```{r fig4}
+#| message: false
+#| error: false
+#Depth of organic layer:
+
+
+ggplot(Useful_Columns, mapping = aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = as.numeric(Depth))) +
+  geom_boxplot() +
+  facet_wrap(~Site) +
+  labs(x = "Year Created", y = "Depth of Organic Layer")
+
+
+```
+
+
+Next I want to know the biomass of each species by year and by site.
+```{r fig5}
+#| message: false
+#| error: false
+
+
+For_Biomass_Plot <- Useful_Columns %>%
+  pivot_longer(
+    cols = 9:12,
+    names_to = "Species",
+    values_to = "Biomass"
+  ) %>%
+  group_by(Year.x.x, Site, Species) %>%
+  summarise(
+    Biomass = mean(Biomass, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+ggplot(For_Biomass_Plot, aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = Biomass, fill = factor(Species, levels = names(Useful_Columns)[9:12]))) +
+  geom_col() +
+  facet_wrap(~Site) +
+  labs(
+    x = "Year",
+    y = "Biomass [g]",
+    fill = "Species"
+  )
+#I made this plot with stacked bar graphs so I could visualize changes to
+#total biomass by year and site, and also see contributions of each species.
+
+
+```
+
+Invertebrates:
+
+```{r fig6}
+#| message: false
+#| error: false
+
+#(Count_MEBI, coffee bean snail counts)
+ggplot(Useful_Columns, mapping = aes(x = factor(Year.x.x, levels = c("Established", "1970", "1990", "2008", "2023", "TZ", "CT")), y = Count_MEBI)) +
+  geom_boxplot() +
+  facet_wrap(~Site) +
+  labs(x = "Year Created", y = "Coffee Bean Snails")
+
+
+```
+
+Now, because I noticed that age and elevation are not perfectly correlated,
+I wonder if organic depth is nicely linked to elevation.
+This should be a scatterplot because the x-axis will now be a continuous variable.
+
+```{r fig7}
+#| message: false
+#| error: false
+
+#I color by age to see which ages might be causing outliers
+#I would especially expect the controls, which aren't migrating to potentially follow a #different trend
+
+ggplot(Useful_Columns, mapping = aes(x = Average.Elevations, y = as.numeric(Depth), color = Year.x.x)) +
+  geom_point() +
+  facet_wrap(~Site) +
+  labs(x = "Elevation [mNAVD88]", y = "Depth of Organic Layer")
+
+
+```
+
+
+Now I expect the 10-30 cm shear strength to be closely tied to the depth of organic layer.
+Organic soil is less firm in general.
+Again, 2 continuous variables, I'm looking for a relationship, so a scatterplot.
+```{r fig8}
+#| message: false
+#| error: false
+
+ggplot(Useful_Columns, mapping = aes(x = as.numeric(Depth), y = as.numeric(Shear_Deep_kpa), color = Year.x.x)) +
+  geom_point() +
+  facet_wrap(~Site) +
+  labs(x = "Depth of Organic Layer [cm]", y = "Shear Strength 10-30cm [kpa]")
+
+
+```
+
+
+Lastly I want to check a few quick things with the control plots - does migration
+impact the relationship between shear strength and elevation?
+I'll make a plot with 2 sets of points on a scatter, and a trendline (lm) through each.
+```{r fig9}
+#| message: false
+#| error: false
+
+#0-10cm shear:
+ggplot(filter(Useful_Columns, Year.x.x != "CT"), 
+       mapping = aes(x = Average.Elevations, y = Shear_Shallow_kpa)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = lm, color = "blue") +
+  geom_point(data = filter(Useful_Columns, Year.x.x == "CT"), mapping = aes(x = Average.Elevations, y = Shear_Shallow_kpa), color = "red") +
+  geom_smooth(data = filter(Useful_Columns, Year.x.x == "CT"), mapping = aes(x = Average.Elevations, y = Shear_Shallow_kpa), color = "red", method = lm) +
+  facet_wrap(~Site) +
+  labs(x = "Elevation [m NAVD88]", y = "Shear Strength 0-10cm [kpa]")
+
+
+```
+
+```{r fig10}
+#| message: false
+#| error: false
+
+
+#10-30cm shear:
+ggplot(filter(Useful_Columns, Year.x.x != "CT"), 
+       mapping = aes(x = Average.Elevations, y = as.numeric(Shear_Deep_kpa))) +
+  geom_point(color = "blue") +
+  geom_smooth(method = lm, color = "blue") +
+  geom_point(data = filter(Useful_Columns, Year.x.x == "CT"), mapping = aes(x = Average.Elevations, y = as.numeric(Shear_Deep_kpa)), color = "red") +
+  geom_smooth(data = filter(Useful_Columns, Year.x.x == "CT"), mapping = aes(x = Average.Elevations, y = as.numeric(Shear_Deep_kpa)), color = "red", method = lm) +
+  facet_wrap(~Site) +
+  labs(x = "Elevation [m NAVD88]", y = "Shear Strength 10-30cm [kpa]")
+
+
+
+```
+
+*Add additional code chunks as needed so each graph shows up after the code used to generate it.*
+
+## Proposed analytical approach
+
+**Considering the study design and data, and your research questions, objectives, and/or testable hypotheses, describe your proposed analytical approach. Include your response and predictor variables, type of analysis (linear regression, generalized linear regression, gam, etc.), model selection criteria, etc. Provide sufficient detail to evaluate your proposed approach in the context of your data and questions of interest. If you have questions or uncertain about anything, highlight that here as well. \[2.5 pts\]**
+
+
+
+My key question is how biomass, shear strength, and coffee bean snail counts vary with marsh age. But, marsh age is strongly correlated with elevation. I also want to know if there is an effect of age on top of the effect on elevation.
+For this assignment, I have realized that I will need to cut my control points - they don't have ages, and therefore can't be included in any models. I will have to do comparisons to them afterwards. A big decision is if I include both age and elevation in the model, and see which is a stronger fit, if I test models with each and see which have better AIC scores, or if I include only elevation in models, and later compare the beta values I get to an equivalent test of each variable vs elevation in the control plots, to see if they differ.
+For this assignment I'm going to skip that last option - I only have 4 control points per site, so I wouldn't be able to obtain statistical significance.
+Also for this assignment, I decided to include site as a random effect, so I'm not doing too many model comparisons for each site individually, because I shouldn't include site as a mixed effect with only 4 sites.
+
+So that leaves 2 options, and I think I'll do both - some models including age and elevation as independent variables, and some including each separately, and see which models come out as the best in model comparison.
+
+I will have age be a factor - I don't know true exact ages to the year, I only know ranges.
+Elevation is continuous. For my responses, coffee bean snail counts are count data that can't be negative, shear strength is a continuous variable that can't be negative, and biomass is a continuous variable that also can't be negative. For biomass I will sum biomass per plot, and look at changes to total biomass vs community composition. In my actual paper I will likely include more species and do some NMDS or PCA tests, but this is a class on regressions.
+
+One major question I have is how to treat established marsh. With year as a factor, it can be included, but I don't know if it should. Established marsh is marsh that has been there for potentially hundreds of years, while all the other age classes are less than 60 years old and were all created by marsh migration. Established marsh is by definition not migrated marsh. It's very useful to include in graphs, to see how age classes compare to it, but if my goal is to test the impacts of marsh migration, I don't think I can include it in regressions. Is there some way to handle this? I thought about including both this and control points and adding another independent variable to all models, a factor called 'migration status', where I define each point as migrated or not. But with a lot fewer replicates in those nonmigrated points than migrated points, I'm not sure if I could obtain significance, and I also have no migrated points at as low of elevation as established marsh. It would also mess up my age data - both established marsh and controls have no age, so I would have to only include elevation as a predictor, and instead of checking how things change with age, I would be directly checking the impact of migration.
+
+
+Ignoring that for now, and including all age classes + established, but not controls:
+
+
+I plan to use generalized linear models.
+For model selection, I will use AIC scores, and test model assumptions. Because a major goal is to test if age has an impact beyond the impact of elevation, I will prioritize including both variables when possible, even if AIC scores are slightly worse, as long as model assumptions are not violated. If not possible, I will compare the strength of a model with just elevation to a model with just age, and in that case both models would need to be kept even if one had significantly better fit than the other.
+
+So a general model format would be
+A GLM with the dependent variable ~ Age + Elevation
+compared to dependent variable ~ Age and dependent variable ~ Elevation
+
+If the relationship is found to be nonlinear, which is entirely possible as marsh migration varies over time and is increasing as the rate of SLR increases, then I may switch to GAM's.
+
+
+
+## AI statement
+
+**If you used AI for this assignment, please describe your use, including:**
+
+**1.  What tool or service did you use?**
+I used chatgpt.
+
+**2.  What was the specific purpose or use?**
+
+I used it to help me construct the stacked bar graph - particularly drawing in names
+from a different dataframe than the data was pulled from, and figuring out how to 
+most easily group by year and site.
+
+**3.  How did this use enhance your understanding of the topic/code?**
+
+It helped me with visualization, but I wouldn't say it enhanced my understanding of the topic.
