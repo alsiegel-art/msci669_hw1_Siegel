@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:6919/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ari Siegel">
+<meta name="dcterms.date" content="2026-10-27">
+
+<title>ARA 669 - Assignment 3</title>
+<style class="anchorjs"></style><style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="./ARA 669 - Assignment 3_files/clipboard.min.js.download"></script>
+<script src="./ARA 669 - Assignment 3_files/quarto.js.download"></script>
+<script src="./ARA 669 - Assignment 3_files/popper.min.js.download"></script>
+<script src="./ARA 669 - Assignment 3_files/tippy.umd.min.js.download"></script>
+<script src="./ARA 669 - Assignment 3_files/anchor.min.js.download"></script>
+<link href="./ARA 669 - Assignment 3_files/tippy.css" rel="stylesheet">
+<link href="./ARA 669 - Assignment 3_files/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="./ARA 669 - Assignment 3_files/bootstrap.min.js.download"></script>
+<link href="./ARA 669 - Assignment 3_files/bootstrap-icons.css" rel="stylesheet">
+<link href="./ARA 669 - Assignment 3_files/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<style>.ansi-display{font-family:monospace;white-space:pre-wrap;--ansiBlack: #000000;--ansiRed: #cd3131;--ansiGreen: #00BC00;--ansiYellow: #949800;--ansiBlue: #0451a5;--ansiMagenta: #bc05bc;--ansiCyan: #0598bc;--ansiWhite: #555555;--ansiBrightBlack: #666666;--ansiBrightRed: #cd3131;--ansiBrightGreen: #14CE14;--ansiBrightYellow: #b5ba00;--ansiBrightBlue: #0451a5;--ansiBrightMagenta: #bc05bc;--ansiBrightCyan: #0598bc;--ansiBrightWhite: #a5a5a5}.dark-mode .ansi-display{--ansiBlack: #000000;--ansiRed: #cd3131;--ansiGreen: #0DBC79;--ansiYellow: #e5e510;--ansiBlue: #2472c8;--ansiMagenta: #bc3fbc;--ansiCyan: #11a8cd;--ansiWhite: #e5e5e5;--ansiBrightBlack: #666666;--ansiBrightRed: #f14c4c;--ansiBrightGreen: #23d18b;--ansiBrightYellow: #f5f543;--ansiBrightBlue: #3b8eea;--ansiBrightMagenta: #d670d6;--ansiBrightCyan: #29b8db;--ansiBrightWhite: #e5e5e5}@keyframes ansi-displaly-run-blink{50%{opacity:0}}.fui-FluentProvider h2{border-bottom:none;padding-bottom:0}</style><style data-make-styles-bucket="d" data-priority="0"></style><style id="fui-FluentProviderr0"></style></head>
+
+<body class="fullcontent quarto-light" data-tabster="{&quot;root&quot;:{}}">
+
+<i tabindex="0" role="none" data-tabster-dummy="" aria-hidden="true" style="position: fixed; height: 1px; width: 1px; opacity: 0.001; z-index: -1; content-visibility: hidden; top: 0px; left: 0px;"></i><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ARA 669 - Assignment 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ari Siegel </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 27, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#overview" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p>The goal of this assignment is to apply the tools and approaches we’ve learned during this course to critique, and then expand on, a statistical analysis.</p>
+<p>Please submit this assignment via GitHub by 2 November.</p>
+</section>
+<section id="read-reflect" class="level2">
+<h2 class="anchored" data-anchor-id="read-reflect">Read &amp; reflect<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#read-reflect" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><strong>Read the article “Do native land crabs hinder forest regeneration on Socorro Island?” (Luna-Zuniga et al.&nbsp;2025). Describe: [2 pt]</strong></p>
+<p>Forests need recruitment. They’re potentially seing low regen. Is it because of land crabs eating seeds? DBH distribution, says that most species have more adults than seedlings. They did some exclusions, crabs mainly consume two species. Big % of those seeds. Germination is super low. Crabs don’t seem to be the only or even main thing - it’s low germination rate.</p>
+<p>The aim of the study was to determine whether there is a lack of tree recruitment and how this varies among forest types on the island, and test whether this crab is the main recruitment barrier for common tree species.</p>
+<p>Did they actually test that? It sounds like no for the different forest types for most of what they covered in the abstract, but I need to keep reading. 3 types of forest.</p>
+<p>They evaluated all 3 forest types. 5 species. A total of 18 vegetation plots 50x10m. Counted individuals in 3 life stages for all species.</p>
+<ol type="1">
+<li><p>The primary question(s) the authors are trying to answer. The authors wanted to know if 3 forest types on this island were recruitment limited, if that differed by forest type, and if land crabs were the main recruitment barrier.</p></li>
+<li><p>The experimental and sampling design. They had one site - the island. 3 forest types. 18 total plots - 6 per site. And they counted and grouped 5 species by life stage in all plots. But, of those 18 plots, they had 16 in 2023 and 2 in 2024 - introducing time. They also compared to an earlier study, but I’m ignoring that from here out because it was not key to addressing their questions. That was all for the recruitment question. For the crab question, they have an experiment for each of their 5 species. There are 2 possible treatments - control and crab exclosure. They have 6 sites for Ilex, 4 for Guettarda and Sideroxylon, and 3 for Psidium. They spread sites and distributed over an elevation range. Each of these sites has 10 pairs of exclosures/controls, which I’ll call plots. Each plot had 10 seeds in it. In this experiment, they also monitored seed loss over a short timespan, and then recruitment (survival of emerging seedlings) over a longer timespan, multiple times (after each of 3 seed placements). These seed placements differed in season - so time comes in again.</p></li>
+<li><p>The statistical approach used. For their recruitment survey, they used GLMM (generalized)’s, with a negative binomial distribution on counts ~ life stage (categorical, 3 levels) + species (categorical, 5 levels) + forest type (categorical, 3 levels) with interactions between species and both other predictor variables. + a random effect of ID. For DBH distributions they used curve-fitting.</p></li>
+</ol>
+<p>For the crab experiment (and the survival experiment afterwards in the same plots), they used GLMM (generalized) with a binomial distribution on proportion of seeds remaining (proportion, from 0-1 or 0-100/initial # seeds, getting odds of survival for an individual seed) ~ treatment (true/false) * species (categorical, 4 levels). + a random factor, treatment ID (0,1). They don’t explicitly say that treatment and species were included separately, but I’m assuming they were.</p>
+<p>They counted so few seedlings they couldn’t do any real stats on emergence and survival.</p>
+<p>They also compared the number of seedlings and the remaining seeds after the experiment by treatment using chisquare tests, predictive variables being treatment, species, and an interaction.</p>
+<p><strong>Imagine you are reviewing this manuscript prior to its publication. Provide a constructive critique of the statistical analyses as they relate to the experimental and sampling design. What did they do well? What would be improved? [3 pt]</strong></p>
+<p>These statistics are thoughtful in some ways, particularly in how they consider the questions they’re trying to ask and the ecology of the area. They only included variables that were key to the experimental design or have a clear ecological reason to be included. But, some statistics couldn’t be run due to low counts, and they should have done more testing and confirmation that these were the best possible versions of each model, or at least reported such in the supplement.</p>
+<p>For the recruitment survey, assuming the responses are linear, a GLMM makes sense if residuals aren’t evenly distributed and there are random effects. Negative binomial for counts makes sense, especially because they could get zeros. Including forest type as a predictor variable makes sense - one of their main questions was if things differ between forest types, so it wouldn’t have worked as a random effect. Including species type as a fixed instead of random effect might make sense and might not. It wasn’t one of their key questions, but knowing how species differ may be important - although it could have been a random effect because it has more than 4 levels (5). Life stage has only 3 levels, and is clearly important, so it had to be a fixed effect instead of random. Interactions between species and the other variables and the random effect of ID are where I’m less confident. ID as a random effect might be overkill if they laid out their plots independently and well - if they checked the model and it was useful, it’s fine to stay, but I would check. For the interactions, their main question was how forest types differ, not how species differ, so I would have swapped out the interaction between species and life stage for one between forest type and life stage if I kept it at all. But it may be that they didn’t accurately explain their goals in the introduction and species type is critical, in which case it might be okay.</p>
+<p>For the crab experiment, GLMM and a binomial distribution for proportion data makes sense. Treatment as a fixed effect makes sense - including species here makes sense ecologically, and because they didn’t necessarily set up these plots across different forest types that wasn’t included. They also only had 4 species here, so including it as a random effect wasn’t a great option anyways. Again ID as a random effect might not be needed, but is worth including at least in an early version of the model to test.</p>
+<p>One major complaint I have is that their last experiment, on seedling emergence and survival after the exclusion experiment concluded, they have no statistics. They clearly either didn’t expect such low germination, or didn’t think far enough ahead to have enough replication to deal with that. If it’s the latter, that’s a problem. If it’s the former, there’s not much they could have done about it. But that’s sampling design anyways, not how they ran the statistics.</p>
+</section>
+<section id="re-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="re-analysis">Re-analysis<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#re-analysis" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p>The data associated with this paper are available here: https://figshare.com/articles/dataset/Luna-Zuniga_etal_Regeneration_Socorro-Island_xlsx/29144249/1?file=54804050. Note that the file has several header lines; remove these in Excel prior to importing the data into R or use <a href="https://readxl.tidyverse.org/articles/multiple-header-rows.html">readxl</a>.</p>
+<p>Based on your critique of the statistical approach taken by Luna-Zuniga et al.&nbsp;(2025), re-analyze the data to evaluate the effect of <em>Johngarthia oceanica</em> on the structure and composition of these island forests, specifically focusing on the seed predation experiment.</p>
+<p><strong>Use the code chunk below to load packages and the data. [0.5 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="http://localhost:6919/#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'glmmTMB' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in check_dep_version(dep_pkg = "TMB"): package version mismatch: 
+glmmTMB was built with TMB package version 1.9.21
+Current TMB package version is 1.9.17
+Please re-install glmmTMB from source or restore original 'TMB' package (see '?reinstalling' for more information)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="http://localhost:6919/#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'performance' was built under R version 4.5.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="http://localhost:6919/#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggeffects' was built under R version 4.5.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="http://localhost:6919/#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="http://localhost:6919/#cb10-1" aria-hidden="true" tabindex="-1"></a>Crab_Seeds_Data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"CrabSeeds.csv"</span>)</span>
+<span id="cb10-2"><a href="http://localhost:6919/#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(Crab_Seeds_Data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data exploration<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#data-exploration" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><strong>Explore the data visually using ggplot2. [0.5 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="http://localhost:6919/#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Remaining)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="http://localhost:6919/#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="http://localhost:6919/#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Removed)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="http://localhost:6919/#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="http://localhost:6919/#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">cut</span>(Altitude, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">700</span>, <span class="dv">750</span>, <span class="dv">800</span>, <span class="dv">850</span>, <span class="dv">900</span>)), <span class="at">y =</span> Remaining)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="http://localhost:6919/#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="http://localhost:6919/#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Worth checking, tried geom_point but there were weird patterns, it was easier to compare boxplots, but nothing really jumps out at me.</span></span>
+<span id="cb14-2"><a href="http://localhost:6919/#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="http://localhost:6919/#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Remaining)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="http://localhost:6919/#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="http://localhost:6919/#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Remaining)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="http://localhost:6919/#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="http://localhost:6919/#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="http://localhost:6919/#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Crab_Seeds_Data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Remaining)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="http://localhost:6919/#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="http://localhost:6919/#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/plotting-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="http://localhost:6919/#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Just a nicer way to see it all than that previous graph.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-development" class="level2">
+<h2 class="anchored" data-anchor-id="model-development">Model development<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#model-development" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><strong>Based on the experimental and sampling design, which variables should be considered as fixed effects? Which could be considered as random effects? What distributions should be considered? [1 pt]</strong></p>
+<p>For this analysis, the response variable being either seeds remaining or seeds removed, or proportion of seeds remaining/removed. To me what makes the most sense is proportion of seeds removed - for percentages we want either beta or binomial. Here, it’s binomial, because it’s a count of successes vs failures.</p>
+<p>Species should be fixed, because there are only 4, and we might be interested to know how the crabs impact different species differently. Site might not be needed at all, if it is included it should be a random effect because we don’t need to know each sites specific impacts or really care what the differences between sites are. ID_treatment, if included, would also be a random effect. It’s almost like plot, with two measurements per plot (each treatment). If it was included, it should probably be nested within site. Treatment is a fixed effect. Lastly altitude, probably doesn’t need to be included. If it is included, it has to be as a fixed effect because it’s numeric. It might be worth including if it’s expected ecologically to matter in this system, just as a check, but probably isn’t needed.</p>
+<p>So I suggest: Binomial, response (proportion of seeds removed) ~ Species + Treatment + (1|Site/ID_Treatment) The random effect could also be (Site/ID_Treatment|1), it may be worth looking at plots of some relationships to see which seems more useful.</p>
+</section>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#analysis" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><strong>Develop a set of generalized linear mixed-effects models that reflect the structures described above. Include a model that includes the same response variables as Luna-Zuniga et al.&nbsp;(2025). [1 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="http://localhost:6919/#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The Luna-Zuniga model:</span></span>
+<span id="cb18-2"><a href="http://localhost:6919/#cb18-2" aria-hidden="true" tabindex="-1"></a>Crab_Seeds_Data<span class="sc">$</span>Prop_Remaining <span class="ot">&lt;-</span> Crab_Seeds_Data<span class="sc">$</span>Remaining<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb18-3"><a href="http://localhost:6919/#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="http://localhost:6919/#cb18-4" aria-hidden="true" tabindex="-1"></a>M_Luna_Zuniga <span class="ot">&lt;-</span><span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in finalizeTMB(TMBStruc, obj, fit, h, data.tmb.old): Model convergence
+problem; non-positive-definite Hessian matrix. See vignette('troubleshooting')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="http://localhost:6919/#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I think the data needs to be laid out in terms of success and failure for this. But, this is how they said they did it in the paper, so I'm sticking with it for now.</span></span>
+<span id="cb21-2"><a href="http://localhost:6919/#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="http://localhost:6919/#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#My first model:</span></span>
+<span id="cb21-4"><a href="http://localhost:6919/#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Putting ID_treatment within site.</span></span>
+<span id="cb21-5"><a href="http://localhost:6919/#cb21-5" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="http://localhost:6919/#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This seems to work a little better.</span></span>
+<span id="cb23-2"><a href="http://localhost:6919/#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="http://localhost:6919/#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Do we need the interaction?</span></span>
+<span id="cb23-4"><a href="http://localhost:6919/#cb23-4" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">+</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!
+Warning in eval(family$initialize): Model convergence problem;
+non-positive-definite Hessian matrix. See vignette('troubleshooting')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="http://localhost:6919/#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We do.</span></span>
+<span id="cb25-2"><a href="http://localhost:6919/#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="http://localhost:6919/#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="http://localhost:6919/#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="http://localhost:6919/#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing if Site/ID_treatment might impact slopes instead of intercepts.</span></span>
+<span id="cb25-6"><a href="http://localhost:6919/#cb25-6" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (Site<span class="sc">/</span>ID_treatment<span class="sc">|</span><span class="dv">1</span>), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="http://localhost:6919/#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The AIC score indicates that this is a stronger model.</span></span>
+<span id="cb27-2"><a href="http://localhost:6919/#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="http://localhost:6919/#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Maybe this is critical, does it impact slope and intercept?</span></span>
+<span id="cb27-4"><a href="http://localhost:6919/#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (Site/ID_treatment|Site/ID_treatment), family = binomial(link = logit))</span></span>
+<span id="cb27-5"><a href="http://localhost:6919/#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#I commented out this model because it ran for forever and almost crashed r.</span></span>
+<span id="cb27-6"><a href="http://localhost:6919/#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="http://localhost:6919/#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#But, is the site/id treatment term needed at all?</span></span>
+<span id="cb27-8"><a href="http://localhost:6919/#cb27-8" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="http://localhost:6919/#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Somehow this gets me identical AIC scores to the model with site/id_treatment impacing slope. I'm not sure I understand why. But the other variables change.</span></span>
+<span id="cb29-2"><a href="http://localhost:6919/#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I'm going to just assume it makes more sense to include the site effect, especially if it doesn't hurt AIC scores.</span></span>
+<span id="cb29-3"><a href="http://localhost:6919/#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="http://localhost:6919/#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="http://localhost:6919/#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#WHat about altitude?</span></span>
+<span id="cb29-6"><a href="http://localhost:6919/#cb29-6" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> Altitude <span class="sc">+</span> (Site<span class="sc">/</span>ID_treatment<span class="sc">|</span><span class="dv">1</span>), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="http://localhost:6919/#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This model is slightly worse - AIC goes up. So that might not have been worth doing.</span></span>
+<span id="cb31-2"><a href="http://localhost:6919/#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="http://localhost:6919/#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="http://localhost:6919/#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Looks like my best model was:</span></span>
+<span id="cb31-5"><a href="http://localhost:6919/#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (Site<span class="sc">/</span>ID_treatment<span class="sc">|</span><span class="dv">1</span>), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Formula:          
+Prop_Remaining ~ Treatment * Species + (Site/ID_treatment | 1)
+Data: Crab_Seeds_Data
+      AIC       BIC    logLik -2*log(L)  df.resid 
+121.88567 147.38475 -52.94283 105.88567       171 
+
+Number of obs: 179
+
+Fixed Effects:
+
+Conditional model:
+                          (Intercept)                     TreatmentExclusion  
+                                2.091                                 20.032  
+                          SpeciesIlex                         SpeciesPsidium  
+                               -1.267                                 -3.724  
+                   SpeciesSideroxylon         TreatmentExclusion:SpeciesIlex  
+                               -6.686                                -17.244  
+    TreatmentExclusion:SpeciesPsidium  TreatmentExclusion:SpeciesSideroxylon  
+                              -16.948                                -11.773  </code></pre>
+</div>
+</div>
+<p><strong>Evaluate the models using an approach covered as part of this class. [0.5 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="http://localhost:6919/#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(M_Luna_Zuniga, M1, M2, M3, M4, M5) <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="http://localhost:6919/#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              df      AIC
+M3             8 121.8857
+M4             8 121.8857
+M5             9 122.3371
+M1            10 125.8857
+M_Luna_Zuniga  9       NA
+M2             7       NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="http://localhost:6919/#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#M3 and M4 have the lowest AIC scores.</span></span>
+<span id="cb36-2"><a href="http://localhost:6919/#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Clearly altitude is not useful, and having the grouping structure as a random effect on the slope is better than intercept.</span></span>
+<span id="cb36-3"><a href="http://localhost:6919/#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Between M3 and M4, M3 makes more sense ecologically, I would expect some structure with site, so I'm sticking with that.</span></span>
+<span id="cb36-4"><a href="http://localhost:6919/#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="http://localhost:6919/#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="http://localhost:6919/#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          
+Prop_Remaining ~ Treatment * Species + (Site/ID_treatment | 1)
+Data: Crab_Seeds_Data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    121.9     147.4     -52.9     105.9       171 
+
+
+Conditional model:
+                                        Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                               2.0907     0.7147   2.926  0.00344
+TreatmentExclusion                       20.0317 14233.5353   0.001  0.99888
+SpeciesIlex                              -1.2671     0.8641  -1.466  0.14251
+SpeciesPsidium                           -3.7244     0.8687  -4.287 1.81e-05
+SpeciesSideroxylon                       -6.6858     2.3582  -2.835  0.00458
+TreatmentExclusion:SpeciesIlex          -17.2444 14233.5354  -0.001  0.99903
+TreatmentExclusion:SpeciesPsidium       -16.9481 14233.5353  -0.001  0.99905
+TreatmentExclusion:SpeciesSideroxylon   -11.7731 14233.5356  -0.001  0.99934
+                                         
+(Intercept)                           ** 
+TreatmentExclusion                       
+SpeciesIlex                              
+SpeciesPsidium                        ***
+SpeciesSideroxylon                    ** 
+TreatmentExclusion:SpeciesIlex           
+TreatmentExclusion:SpeciesPsidium        
+TreatmentExclusion:SpeciesSideroxylon    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="http://localhost:6919/#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          Prop_Remaining ~ Treatment * Species
+Data: Crab_Seeds_Data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    121.9     147.4     -52.9     105.9       171 
+
+
+Conditional model:
+                                        Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                               2.0907     0.7147   2.926  0.00344
+TreatmentExclusion                       20.0317 14233.5353   0.001  0.99888
+SpeciesIlex                              -1.2671     0.8641  -1.466  0.14251
+SpeciesPsidium                           -3.7244     0.8687  -4.287 1.81e-05
+SpeciesSideroxylon                       -6.6858     2.3582  -2.835  0.00458
+TreatmentExclusion:SpeciesIlex          -17.2444 14233.5354  -0.001  0.99903
+TreatmentExclusion:SpeciesPsidium       -16.9481 14233.5353  -0.001  0.99905
+TreatmentExclusion:SpeciesSideroxylon   -11.7731 14233.5356  -0.001  0.99934
+                                         
+(Intercept)                           ** 
+TreatmentExclusion                       
+SpeciesIlex                              
+SpeciesPsidium                        ***
+SpeciesSideroxylon                    ** 
+TreatmentExclusion:SpeciesIlex           
+TreatmentExclusion:SpeciesPsidium        
+TreatmentExclusion:SpeciesSideroxylon    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="http://localhost:6919/#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#They give identical results for some strange reason, so it's quite hard to compare them.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Check your model diagnostics (i.e., are the model assumptions met) using an approach covered as part of this class. [1 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="http://localhost:6919/#cb41-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, Prop_Remaining <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (Site<span class="sc">/</span>ID_treatment<span class="sc">|</span><span class="dv">1</span>), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(family$initialize): non-integer #successes in a binomial glm!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="http://localhost:6919/#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          
+Prop_Remaining ~ Treatment * Species + (Site/ID_treatment | 1)
+Data: Crab_Seeds_Data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    121.9     147.4     -52.9     105.9       171 
+
+
+Conditional model:
+                                        Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                               2.0907     0.7147   2.926  0.00344
+TreatmentExclusion                       20.0317 14233.5353   0.001  0.99888
+SpeciesIlex                              -1.2671     0.8641  -1.466  0.14251
+SpeciesPsidium                           -3.7244     0.8687  -4.287 1.81e-05
+SpeciesSideroxylon                       -6.6858     2.3582  -2.835  0.00458
+TreatmentExclusion:SpeciesIlex          -17.2444 14233.5354  -0.001  0.99903
+TreatmentExclusion:SpeciesPsidium       -16.9481 14233.5353  -0.001  0.99905
+TreatmentExclusion:SpeciesSideroxylon   -11.7731 14233.5356  -0.001  0.99934
+                                         
+(Intercept)                           ** 
+TreatmentExclusion                       
+SpeciesIlex                              
+SpeciesPsidium                        ***
+SpeciesSideroxylon                    ** 
+TreatmentExclusion:SpeciesIlex           
+TreatmentExclusion:SpeciesPsidium        
+TreatmentExclusion:SpeciesSideroxylon    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="http://localhost:6919/#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(M3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test (using simulated residuals)
+
+ dispersion ratio =   0.426
+          p-value = &lt; 0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="http://localhost:6919/#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Not great, there's good evidence for overdispersion.</span></span>
+<span id="cb47-2"><a href="http://localhost:6919/#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(M2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test (using simulated residuals)
+
+ dispersion ratio =   0.440
+          p-value = &lt; 0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="http://localhost:6919/#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Even worse.</span></span>
+<span id="cb49-2"><a href="http://localhost:6919/#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="http://localhost:6919/#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(M_Luna_Zuniga)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test (using simulated residuals)
+
+ dispersion ratio =   0.423
+          p-value = &lt; 0.001</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="http://localhost:6919/#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Their model also had this issue.</span></span>
+<span id="cb51-2"><a href="http://localhost:6919/#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="http://localhost:6919/#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(M3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/diagnostics-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="http://localhost:6919/#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Not fantastic, homogeneity of variance is a bit off, but not terrible.</span></span>
+<span id="cb52-2"><a href="http://localhost:6919/#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The big issue is VIF - the VIF indicates high colinearity in Treatment and Treatment:Species.</span></span>
+<span id="cb52-3"><a href="http://localhost:6919/#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(M2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/diagnostics-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="http://localhost:6919/#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Without the interaction that issue goes away and these plots look better - other than some slight issues with the binned residuals.</span></span>
+<span id="cb53-2"><a href="http://localhost:6919/#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="http://localhost:6919/#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#So, the model I chose isn't very good.</span></span>
+<span id="cb53-4"><a href="http://localhost:6919/#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#In my defense, none of the models I tried were very good - most had at least one major issue.</span></span>
+<span id="cb53-5"><a href="http://localhost:6919/#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">#I wonder if year would have helped, I would have added it as a random effect to test if they included that data.</span></span>
+<span id="cb53-6"><a href="http://localhost:6919/#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="http://localhost:6919/#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="http://localhost:6919/#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-9"><a href="http://localhost:6919/#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co">#I also still suspect something is wrong with the way I've laid out the response data.</span></span>
+<span id="cb53-10"><a href="http://localhost:6919/#cb53-10" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">+</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-11"><a href="http://localhost:6919/#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Something like this removes the warnings.</span></span>
+<span id="cb53-12"><a href="http://localhost:6919/#cb53-12" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">+</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-13"><a href="http://localhost:6919/#cb53-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="http://localhost:6919/#cb53-14" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-15"><a href="http://localhost:6919/#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Then the interaction still helps</span></span>
+<span id="cb53-16"><a href="http://localhost:6919/#cb53-16" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> (Site<span class="sc">/</span>ID_treatment<span class="sc">|</span><span class="dv">1</span>), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-17"><a href="http://localhost:6919/#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="co">#But, the random effect on intercept is stronger than on slope here.</span></span>
+<span id="cb53-18"><a href="http://localhost:6919/#cb53-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-19"><a href="http://localhost:6919/#cb53-19" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> Altitude <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site<span class="sc">/</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-20"><a href="http://localhost:6919/#cb53-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Here altitude actually improves the model.</span></span>
+<span id="cb53-21"><a href="http://localhost:6919/#cb53-21" aria-hidden="true" tabindex="-1"></a>M6 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-22"><a href="http://localhost:6919/#cb53-22" aria-hidden="true" tabindex="-1"></a><span class="co">#As does the random effect.</span></span>
+<span id="cb53-23"><a href="http://localhost:6919/#cb53-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-24"><a href="http://localhost:6919/#cb53-24" aria-hidden="true" tabindex="-1"></a>M7 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> Altitude <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Site), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-25"><a href="http://localhost:6919/#cb53-25" aria-hidden="true" tabindex="-1"></a>M8 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">*</span> Species <span class="sc">+</span> Altitude <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb53-26"><a href="http://localhost:6919/#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Do we need the grouping in the random effect?</span></span>
+<span id="cb53-27"><a href="http://localhost:6919/#cb53-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-28"><a href="http://localhost:6919/#cb53-28" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(M1, M2, M3, M4, M5, M6, M7, M8) <span class="sc">%&gt;%</span></span>
+<span id="cb53-29"><a href="http://localhost:6919/#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   df      AIC
+M8 10 502.3948
+M5 11 504.3948
+M3 10 505.8376
+M1  7 573.0213
+M2  7 573.0213
+M7 10 613.6682
+M4  8 639.7073
+M6  8 639.7073</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="http://localhost:6919/#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now M8, with altitude and the random effect being only ID_treatment on intercept, is the best.</span></span>
+<span id="cb55-2"><a href="http://localhost:6919/#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Strange grouping within site doesn't help AIC values. Maybe it helps in model evaluation.</span></span>
+<span id="cb55-3"><a href="http://localhost:6919/#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="http://localhost:6919/#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          cbind(Remaining, Removed) ~ Treatment * Species + Altitude +  
+    (1 | ID_treatment)
+Data: Crab_Seeds_Data
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    502.4     534.3    -241.2     482.4       169 
+
+Random effects:
+
+Conditional model:
+ Groups       Name        Variance Std.Dev.
+ ID_treatment (Intercept) 2.597    1.612   
+Number of obs: 179, groups:  ID_treatment, 90
+
+Conditional model:
+                                        Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                           -8.151e+00  5.850e+00  -1.393   0.1636
+TreatmentExclusion                     2.087e+01  5.713e+03   0.004   0.9971
+SpeciesIlex                           -9.374e-01  8.219e-01  -1.141   0.2541
+SpeciesPsidium                        -4.859e+00  7.058e-01  -6.885 5.79e-12
+SpeciesSideroxylon                    -8.619e+00  1.144e+00  -7.536 4.85e-14
+Altitude                               1.370e-02  7.055e-03   1.941   0.0522
+TreatmentExclusion:SpeciesIlex        -1.734e+01  5.713e+03  -0.003   0.9976
+TreatmentExclusion:SpeciesPsidium     -1.671e+01  5.713e+03  -0.003   0.9977
+TreatmentExclusion:SpeciesSideroxylon -1.021e+01  5.713e+03  -0.002   0.9986
+                                         
+(Intercept)                              
+TreatmentExclusion                       
+SpeciesIlex                              
+SpeciesPsidium                        ***
+SpeciesSideroxylon                    ***
+Altitude                              .  
+TreatmentExclusion:SpeciesIlex           
+TreatmentExclusion:SpeciesPsidium        
+TreatmentExclusion:SpeciesSideroxylon    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="http://localhost:6919/#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(M8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test (using simulated residuals)
+
+ dispersion ratio = 1.063
+          p-value = 0.088</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="http://localhost:6919/#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Not quite significant now, that's an improvement</span></span>
+<span id="cb59-2"><a href="http://localhost:6919/#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(M8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/diagnostics-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="http://localhost:6919/#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I still have problems with VIF and binned residuals.</span></span>
+<span id="cb60-2"><a href="http://localhost:6919/#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="http://localhost:6919/#cb60-3" aria-hidden="true" tabindex="-1"></a>M9 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">cbind</span>(Remaining, Removed) <span class="sc">~</span> Treatment <span class="sc">+</span> Species <span class="sc">+</span> Altitude <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>ID_treatment), <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> logit))</span>
+<span id="cb60-4"><a href="http://localhost:6919/#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(M8, M9)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   df      AIC
+M8 10 502.3948
+M9  7 569.3015</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="http://localhost:6919/#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Removing the interaction hurts AIC a lot, but</span></span>
+<span id="cb62-2"><a href="http://localhost:6919/#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(M9)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/diagnostics-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="http://localhost:6919/#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#It helps with VIF.</span></span>
+<span id="cb63-2"><a href="http://localhost:6919/#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I'll go with this one.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Which model would you choose as your final model? Why is that model preferred over the others? [1 pt]</strong> M9 &lt;- glmmTMB(data = Crab_Seeds_Data, cbind(Remaining, Removed) ~ Treatment + Species + Altitude + (1|ID_treatment), family = binomial(link = logit)) It makes sense ecologically to include treatment and species. Altitude improves AIC scores, and the random effect does as well. No interaction between treatment and species hurts AIC scores but removes colinearity, which was too high in M8.</p>
+<p><strong>Generate model predictions (using the ggeffects package) and plot the predictions over observed data. Describe your results. [1.5 pt]</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="http://localhost:6919/#cb64-1" aria-hidden="true" tabindex="-1"></a>M9_predict <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(M9, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"Altitude"</span>, <span class="st">"Treatment"</span>, <span class="st">"Species"</span>))</span>
+<span id="cb64-2"><a href="http://localhost:6919/#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M9_predict, <span class="at">show_data =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/predictions-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="http://localhost:6919/#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M9_predict, <span class="at">show_data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb65-2"><a href="http://localhost:6919/#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">data =</span> Crab_Seeds_Data, <span class="fu">aes</span>(<span class="at">x =</span> Altitude),</span>
+<span id="cb65-3"><a href="http://localhost:6919/#cb65-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">sides =</span> <span class="st">"b"</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb65-4"><a href="http://localhost:6919/#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="./ARA 669 - Assignment 3_files/predictions-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#conclusions" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><strong>How do your results compare to those presented by Luna-Zuniga et al.&nbsp;(2025)? [1 pt]</strong> My results are similar to the ones presented by Luna-Zuniga. I also find that two species - Psidium and Sideroxylon, have significant reductions in seeds compared to other species. So that agrees with their point that those two species were the most consumed by crabs. But I don’t see strong evidence that the treatment mattered - exclusion vs inclusion are nowhere near significant. That means that I didn’t find support for their idea that it’s the crabs consuming these seeds. Although in my predict, it’s clear at least visually that for those two species the control and exclusion experiments very very different in how many seeds survived - strange that didn’t show up in the stats.</p>
+<p><strong>Provide summary statements about the quality of your analysis, including any potential limitations or caveats. [1 pt]</strong></p>
+<p>This analysis isn’t perfect by any means. I didn’t find any version of the model that was strong in AIC scores compared to other models without violating some assumptions when I checked the model. Some of the relationships I can see graphically and in predictions don’t show up statistically in the p-values, and the interpretation of these statistics with so many variables in the model are complicated. I’m missing year as a variable, because it wasn’t provided, but that’s another possible variable impacting things. On top of all of that, while overdispersion wasn’t quite significant in my best model, it was near significant, so I might be missing some important variable.</p>
+</section>
+<section id="ai-statement" class="level2">
+<h2 class="anchored" data-anchor-id="ai-statement">AI statement<a class="anchorjs-link " aria-label="Anchor" data-anchorjs-icon="" href="http://localhost:6919/#ai-statement" style="font: 1em / 1 anchorjs-icons; margin-left: 0.1875em; padding-right: 0.1875em; padding-left: 0.1875em;"></a></h2>
+<p><em>If you used AI for this assignment, please describe your use, including:</em></p>
+<p><em>1. What tool or service did you use?</em> Chatgpt <em>2. What was the specific purpose or use?</em> To solve a few weird issues I had - mainly understanding how to fix the data to have both removed and remaining formatted in a way that removed some of the warnings I got. <em>3. How did this use enhance your understanding of the topic/code?</em> It helped me understand how data should best be formatted for a binomial distribution.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+
+<script>window.backupDefine = window.define; window.define = undefined;</script>
+<script type="text/javascript" src="./ARA 669 - Assignment 3_files/quarto-preview.js.download"></script>
+<script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+<script type="text/javascript">
+  const options = {
+    origin: "",
+    search: "",
+    inputFile: "C:\Users\arile\OneDrive\Desktop\Regressions Class Repository\msci669_hw1\hw3_template.qmd",
+    isPresentation: false
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    window.QuartoPreview.init(options);
+  });
+</script>
+<div><div dir="ltr" class="fui-FluentProvider fui-FluentProviderr0 ___jdtuxv0 f19n0e5 fxugw4r f1o700av fk6fouc fkhj508 figsok6 f1i3iumi"></div></div><i tabindex="0" role="none" data-tabster-dummy="" aria-hidden="true" style="position: fixed; height: 1px; width: 1px; opacity: 0.001; z-index: -1; content-visibility: hidden; top: 0px; left: 0px;"></i></body></html>
