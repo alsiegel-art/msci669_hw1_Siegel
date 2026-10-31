@@ -1,0 +1,319 @@
+---
+title: "ARA 669 - Assignment 3"
+author: "Ari Siegel"
+date: "10/27/2026"
+output: html_document
+---
+
+## Overview
+
+The goal of this assignment is to apply the tools and approaches we've learned during this course to critique, and then expand on, a statistical analysis. 
+
+Please submit this assignment via GitHub by 2 November.   
+
+## Read & reflect
+
+**Read the article "Do native land crabs hinder forest regeneration on Socorro Island?" (Luna-Zuniga et al. 2025). Describe: \[2 pt\]**
+
+
+
+Forests need recruitment. They're potentially seing low regen. Is it because of land crabs eating seeds? DBH distribution, says that most species have more adults than seedlings. They did some exclusions, crabs mainly consume two species. Big % of those seeds. Germination is super low. Crabs don't seem to be the only or even main thing - it's low germination rate.
+
+The aim of the study was to determine whether there is a lack of tree recruitment and how this varies among forest types on the island, and test whether this crab is the main recruitment barrier for common tree species.
+
+Did they actually test that? It sounds like no for the different forest types for most of what they covered in the abstract, but I need to keep reading.
+3 types of forest.
+
+They evaluated all 3 forest types. 5 species.
+A total of 18 vegetation plots 50x10m.
+Counted individuals in 3 life stages for all species. 
+
+
+1. The primary question(s) the authors are trying to answer.
+The authors wanted to know if 3 forest types on this island were recruitment limited, if that differed by forest type, and if land crabs were the main recruitment barrier.
+
+2. The experimental and sampling design. 
+They had one site - the island. 3 forest types. 18 total plots - 6 per site. And they counted and grouped 5 species by life stage in all plots. But, of those 18 plots, they had 16 in 2023 and 2 in 2024 - introducing time. They also compared to an earlier study, but I'm ignoring that from here out because it was not key to addressing their questions.
+That was all for the recruitment question. For the crab question, they have an experiment for each of their 5 species. There are 2 possible treatments - control and crab exclosure. They have 6 sites for Ilex, 4 for Guettarda and Sideroxylon, and 3 for Psidium. They spread sites and distributed over an elevation range.
+Each of these sites has 10 pairs of exclosures/controls, which I'll call plots. Each plot had 10 seeds in it.
+In this experiment, they also monitored seed loss over a short timespan, and then recruitment (survival of emerging seedlings) over a longer timespan, multiple times (after each of 3 seed placements).
+These seed placements differed in season - so time comes in again.
+
+
+3. The statistical approach used. 
+For their recruitment survey, they used GLMM (generalized)'s, with a negative binomial distribution on counts ~ life stage (categorical, 3 levels) + species (categorical, 5 levels) + forest type (categorical, 3 levels) with interactions between species and both other predictor variables. + a random effect of ID.
+For DBH distributions they used curve-fitting.
+
+For the crab experiment (and the survival experiment afterwards in the same plots), they used GLMM (generalized) with a binomial distribution on proportion of seeds remaining (proportion, from 0-1 or 0-100/initial # seeds, getting odds of survival for an individual seed) ~ treatment (true/false) * species (categorical, 4 levels). + a random factor, treatment ID (0,1).
+They don't explicitly say that treatment and species were included separately, but I'm assuming they were.
+
+They counted so few seedlings they couldn't do any real stats on emergence and survival.
+
+
+They also compared the number of seedlings and the remaining seeds after the experiment by treatment using chisquare tests, predictive variables being treatment, species, and an interaction.
+
+
+**Imagine you are reviewing this manuscript prior to its publication. Provide a constructive critique of the statistical analyses as they relate to the experimental and sampling design. What did they do well? What would be improved? \[3 pt\]**
+
+These statistics are thoughtful in some ways, particularly in how they consider the questions they're trying to ask and the ecology of the area. They only included variables that were key to the experimental design or have a clear ecological reason to be included. But, some statistics couldn't be run due to low counts, and they should have done more testing and confirmation that these were the best possible versions of each model, or at least reported such in the supplement.
+
+For the recruitment survey, assuming the responses are linear, a GLMM makes sense if residuals aren't evenly distributed and there are random effects. Negative binomial for counts makes sense, especially because they could get zeros. Including forest type as a predictor variable makes sense - one of their main questions was if things differ between forest types, so it wouldn't have worked as a random effect. Including species type as a fixed instead of random effect might make sense and might not. It wasn't one of their key questions, but knowing how species differ may be important - although it could have been a random effect because it has more than 4 levels (5). Life stage has only 3 levels, and is clearly important, so it had to be a fixed effect instead of random. Interactions between species and the other variables and the random effect of ID are where I'm less confident. ID as a random effect might be overkill if they laid out their plots independently and well - if they checked the model and it was useful, it's fine to stay, but I would check. For the interactions, their main question was how forest types differ, not how species differ, so I would have swapped out the interaction between species and life stage for one between forest type and life stage if I kept it at all. But it may be that they didn't accurately explain their goals in the introduction and species type is critical, in which case it might be okay.
+
+For the crab experiment, GLMM and a binomial distribution for proportion data makes sense. Treatment as a fixed effect makes sense - including species here makes sense ecologically, and because they didn't necessarily set up these plots across different forest types that wasn't included. They also only had 4 species here, so including it as a random effect wasn't a great option anyways. Again ID as a random effect might not be needed, but is worth including at least in an early version of the model to test.
+
+One major complaint I have is that their last experiment, on seedling emergence and survival after the exclusion experiment concluded, they have no statistics. They clearly either didn't expect such low germination, or didn't think far enough ahead to have enough replication to deal with that. If it's the latter, that's a problem. If it's the former, there's not much they could have done about it. But that's sampling design anyways, not how they ran the statistics.
+
+
+
+
+
+## Re-analysis
+
+The data associated with this paper are available here: https://figshare.com/articles/dataset/Luna-Zuniga_etal_Regeneration_Socorro-Island_xlsx/29144249/1?file=54804050. Note that the file has several header lines; remove these in Excel prior to importing the data into R or use [readxl](https://readxl.tidyverse.org/articles/multiple-header-rows.html).
+
+Based on your critique of the statistical approach taken by Luna-Zuniga et al. (2025), re-analyze the data to evaluate the effect of *Johngarthia oceanica* on the structure and composition of these island forests, specifically focusing on the seed predation experiment.
+
+**Use the code chunk below to load packages and the data. \[0.5 pt\]**
+
+```{r setup}
+#| message: false
+#| error: false
+
+library(glmmTMB)
+library(performance)
+library(ggeffects)
+library(tidyverse)
+
+Crab_Seeds_Data <- read.csv("CrabSeeds.csv")
+view(Crab_Seeds_Data)
+
+
+```
+
+## Data exploration
+
+**Explore the data visually using ggplot2. \[0.5 pt\]**
+
+```{r plotting}
+#| message: false
+#| error: false
+
+ggplot(Crab_Seeds_Data, mapping = aes(x = Species, y = Remaining)) +
+  geom_boxplot()
+ggplot(Crab_Seeds_Data, mapping = aes(x = Species, y = Removed)) +
+  geom_boxplot()
+ggplot(Crab_Seeds_Data, mapping = aes(x = cut(Altitude, breaks = c(700, 750, 800, 850, 900)), y = Remaining)) +
+  geom_boxplot()
+#Worth checking, tried geom_point but there were weird patterns, it was easier to compare boxplots, but nothing really jumps out at me.
+
+ggplot(Crab_Seeds_Data, mapping = aes(x = Treatment, y = Remaining)) +
+  geom_boxplot()
+ggplot(Crab_Seeds_Data, mapping = aes(x = Treatment, y = Remaining)) +
+  geom_boxplot() +
+  facet_wrap(~Species)
+ggplot(Crab_Seeds_Data, mapping = aes(x = Species, y = Remaining)) +
+  geom_boxplot() +
+  facet_wrap(~Treatment)
+#Just a nicer way to see it all than that previous graph.
+
+
+
+
+```
+
+## Model development
+
+**Based on the experimental and sampling design, which variables should be considered as fixed effects? Which could be considered as random effects? What distributions should be considered? \[1 pt\]**
+
+For this analysis, the response variable being either seeds remaining or seeds removed, or proportion of seeds remaining/removed.
+To me what makes the most sense is proportion of seeds removed - for percentages we want either beta or binomial. Here, it's binomial, because it's a count of successes vs failures.
+
+Species should be fixed, because there are only 4, and we might be interested to know how the crabs impact different species differently. Site might not be needed at all, if it is included it should be a random effect because we don't need to know each sites specific impacts or really care what the differences between sites are. ID_treatment, if included, would also be a random effect. It's almost like plot, with two measurements per plot (each treatment). If it was included, it should probably be nested within site.
+Treatment is a fixed effect.
+Lastly altitude, probably doesn't need to be included. If it is included, it has to be as a fixed effect because it's numeric. It might be worth including if it's expected ecologically to matter in this system, just as a check, but probably isn't needed.
+
+So I suggest:
+Binomial, response (proportion of seeds removed) ~ Species + Treatment + (1|Site/ID_Treatment)
+The random effect could also be (Site/ID_Treatment|1), it may be worth looking at plots of some relationships to see which seems more useful.
+
+
+
+
+
+## Analysis
+
+**Develop a set of generalized linear mixed-effects models that reflect the structures described above. Include a model that includes the same response variables as Luna-Zuniga et al. (2025). \[1 pt\]**
+
+```{r models}
+#| message: false
+#| error: false
+
+#The Luna-Zuniga model:
+Crab_Seeds_Data$Prop_Remaining <- Crab_Seeds_Data$Remaining/10
+
+M_Luna_Zuniga <-glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (1|ID_treatment), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M_Luna_Zuniga)
+
+#My first model:
+#Putting ID_treatment within site.
+M1 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (1|Site/ID_treatment), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M1)
+#Not much better - I was hoping to address huge standard errors on the treatment exclusion parts.
+
+#Do we need the interaction?
+M2 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment + Species + (1|Site/ID_treatment), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M2)
+#We do according to AIC, although I don't have any of the crazy standard errors now and gained some significant results.
+#So maybe it's worth the tradeoff
+
+
+
+#Testing if Site/ID_treatment might impact slopes instead of intercepts.
+M3 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (Site/ID_treatment|1), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M3)
+#The AIC score indicates that this is a worse model.
+
+#Maybe this is critical, does it impact slope and intercept?
+#glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (Site/ID_treatment|Site/ID_treatment), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+#I commented out this model because it ran for forever and almost crashed r.
+
+#But, is the site/id treatment term needed at all?
+M4 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species, family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M4)
+#Somehow this gets me identical AIC scores to the model with site/id_treatment impacing slope. I'm not sure I understand why. But the other variables change.
+#I'm going to just assume it makes more sense to include the site effect, especially if it doesn't hurt AIC scores.
+
+
+#What about altitude?
+M5 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + Altitude + (Site/ID_treatment|1), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M5)
+#This model doesn't work.
+
+
+#Looks like my best model M1, although the paper model was even slightly better, according to AIC scores alone.
+#But, M2 has more reasonable standard errors, so maybe it not including the interaction is a good thing.
+
+
+M6 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment + Species + Altitude + (1|ID_treatment), family = binomial(link = logit),
+              weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M6)
+
+
+
+```
+
+**Evaluate the models using an approach covered as part of this class. \[0.5 pt\]**
+
+```{r modelselection}
+#| message: false
+#| error: false
+
+
+AIC(M_Luna_Zuniga, M1, M2, M3, M4, M5, M6) %>%
+  arrange(AIC)
+
+
+#M_Luna_Zuniga and then M1 have the lowest AIC scores
+#Clearly altitude is not useful, and having the grouping structure as a random effect on the slope is better than intercept.
+#Between M_Luna_Zuniga and M1, I would go with M1 because the grouping makes more sense ecologically, even at a slight increase of AIC
+
+
+BIC(M_Luna_Zuniga, M1, M2, M3, M4, M5, M6) %>%
+  arrange(BIC)
+#BIC scores agree.
+
+
+```
+
+**Check your model diagnostics (i.e., are the model assumptions met) using an approach covered as part of this class. \[1 pt\]**
+
+```{r diagnostics}
+#| message: false
+#| error: false
+
+M3 <- glmmTMB(data = Crab_Seeds_Data, Prop_Remaining ~ Treatment * Species + (Site/ID_treatment|1), family = binomial(link = logit), weights = rep(10, nrow(Crab_Seeds_Data)))
+summary(M3)
+check_overdispersion(M3)
+#Not great, there's good evidence for overdispersion.
+check_overdispersion(M2)
+#Almost as bad.
+
+check_overdispersion(M1)
+#My model 1 didn't have overdispersion. But:
+check_overdispersion(M_Luna_Zuniga)
+#Neither did theirs.
+
+check_model(M1)
+#Not fantastic, homogeneity of variance is a bit off, but not terrible.
+#The big issue is VIF - the VIF indicates high colinearity in Treatment and Treatment:Species.
+check_model(M2)
+#Without the interaction that issue goes away and these plots look better - other than some slight issues with the binned residuals.
+
+check_model(M_Luna_Zuniga)
+#Their model has the VIF issue just like my M1 - M2 might be better because it removes that.
+
+
+
+```
+
+**Which model would you choose as your final model? Why is that model preferred over the others? \[1 pt\]**
+M2
+It makes sense ecologically to include treatment and species. The random effect appears worth including.
+No interaction between treatment and species hurts AIC scores but removes colinearity.
+
+
+**Generate model predictions (using the ggeffects package) and plot the predictions over observed data. Describe your results. \[1.5 pt\]**
+
+```{r predictions}
+#| message: false
+#| error: false
+Crab_Seeds_Data$Weights <- 10
+M2 <- glmmTMB(
+  data = Crab_Seeds_Data,
+  Prop_Remaining ~ Treatment + Species + (1|Site/ID_treatment),
+  family = binomial(link = "logit"),
+  weights = Weights
+)
+
+M2_predict <- ggpredict(M2, terms = c("Treatment", "Species"))
+plot(M2_predict, show_data = TRUE)
+
+M2_predict <- ggpredict(M2, terms = c("Species", "Treatment"))
+plot(M2_predict, show_data = TRUE)
+
+#Interesting, the control and exclusion don't look as different as I would expect.
+#The two species that had significant differences between control and treatment do have a pronounced difference.
+#What I see is that most of Psidium and Sideroxylon would live in the treatment, and most die in the control.
+#It's hard to tell what's happening with the other two species.
+
+
+```
+
+
+## Conclusions
+
+**How do your results compare to those presented by Luna-Zuniga et al. (2025)? \[1 pt\]**
+My results are similar to the ones presented by Luna-Zuniga.
+I also find that two species - Psidium and Sideroxylon, have significant reductions in seeds compared to other species.
+So that agrees with their point that those two species were the most consumed by crabs.
+But I don't see strong evidence that the treatment mattered - exclusion vs inclusion are nowhere near significant. That means that I didn't find support for their idea that it's the crabs consuming these seeds.
+Although in my predict, it's clear at least visually that for those two species the control and exclusion experiments very very different in how many seeds survived - strange that didn't show up in the stats.
+
+**Provide summary statements about the quality of your analysis, including any potential limitations or caveats. \[1 pt\]**
+
+This analysis isn't perfect by any means. I didn't find any version of the model that was strong in AIC scores compared to other models without violating some assumptions when I checked the model.
+Some of the relationships I can see graphically and in predictions don't show up statistically in the p-values, and the interpretation of these statistics with so many variables in the model are complicated.
+I'm missing year as a variable, because it wasn't provided, but that's another possible variable impacting things.
+
+
+
+## AI statement
+
+*If you used AI for this assignment, please describe your use, including:*
+
+*1.  What tool or service did you use?*
+Chatgpt
+*2.  What was the specific purpose or use?*
+To solve a few weird issues I had - mainly understanding how to fix the data to have both removed and remaining formatted in a way that removed some of the warnings I got.
+*3.  How did this use enhance your understanding of the topic/code?*
+It helped me understand how data should best be formatted for a binomial distribution.
